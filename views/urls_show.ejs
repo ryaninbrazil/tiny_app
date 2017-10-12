@@ -5,14 +5,13 @@
 </head>
 <body>
     <% include partials/_headers.ejs %>
-    <h1>Hi there we are here in underscore URL </h1>
-
-   
-      <tr>
-          <td><%= shortURL %></td>
-          <td><%= fullURL %></td>
+    <h2>Details of the ShortURL </h2>
+    ShortURL : <b>  <%= shortURL %> </b>
+    <form method="POST" action="/urls/<%= shortURL %>">
+      <input type="text" value= <%= fullURL %> name="longURL">
+      <input type="Submit" value="Upate Long URL">
+    </form>
   
-      </tr>
-
+   
 </body>
 </html
