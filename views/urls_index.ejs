@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+</head>
+<body>
+        <% include partials/_headers.ejs %>
+    <table>
+        <thead>
+            <tr>
+                <th>Short Url</th>
+                <th>Long Url</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% for(var shortURL in urls) { %>
+                <tr>
+                    <td><%= shortURL %></td>    
+                    <td><%= urls[shortURL] %></td>    
+                    <td>
+                        <form method="POST" action="/urls/<%= shortURL %>/delete">
+                            <input type="submit" value="Delete Long URL">
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+<!-- !DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+</head>
+<body>
+    <ul>
+        <li>URL's and their Shortened Form</li>
+    </ul>
+
+    <a>Link for Shortening</a>
+</body>
+</html> -->
+

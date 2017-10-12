@@ -1,0 +1,16 @@
+{
+  "name": "tiny_app",
+  "version": "1.0.0",
+  "description": "lighthouse labs tiny app project booooy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Ryan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
+}
