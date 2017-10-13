@@ -1,5 +1,12 @@
+
+
+
+
 var express = require("express");
+var cookieParser = require('cookie-parser')
+
 var app = express();
+app.use(cookieParser())
 var PORT = process.env.PORT || 8080; 
 
 app.set("view engine", "ejs");
@@ -10,7 +17,10 @@ function generateRandomString() {
     for (i = 0; i < 6; i++) {
     text += randstring.charAt(Math.floor(Math.random() * randstring.length));
     } return text;
-}
+};
+
+let text = "";
+    text = [1,2,3]
 
   var urlDatabase = {
     "b2xVn2": "http://www.lighthouselabs.ca",
@@ -27,6 +37,9 @@ app.get("/u/:shortURL", (req, res) => {
 
 
 app.get("/", (req, res) => {
+  res.cookie.username = 'hello'; // set cookie
+  // user reads cookie, not actually set here..
+  console.log(req.cookies.username); // read cookie
   res.end("Hello!");
 });
 
@@ -37,7 +50,10 @@ app.get("/urls.json", (req, res) => {
 
 
 app.get("/urls", (req, res) => {
-    let templateVars = { urls: urlDatabase, rand:generateRandomString()  };
+    let templateVars = { 
+      urls: urlDatabase, 
+      rand:generateRandomString(), 
+      username: req.cookies["username"] };
     res.render("urls_index", templateVars);
 });
 
@@ -72,6 +88,25 @@ app.post("/urls/:id/delete", (req, res) => {
 
 });
 
+
+
+
+app.post("/login", (req, res) => {
+  /*
+    req.params.id  // /example/:id    ---  :id id now a field
+    req.query.search // after the "?"" in the url
+    req.body.username  // HTTP POST, PUT
+    */
+
+      // req.cookies.username    read cookie
+    res.cookie('username', req.body.username); // sets cookie,
+    res.redirect('/urls');
+});
+
+app.post("/logout", (req, res) => {
+    res.clearCookie('username')
+    res.redirect('/urls')
+});
 
 app.post("/urls/:id", (req, res) => {
 
